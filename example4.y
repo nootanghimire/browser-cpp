@@ -79,13 +79,13 @@ main()
 %%
 
 tag:    |   
-        contents opening_tag contents closing_tag 
+        opening_tag contents closing_tag 
         {
             //cout<<$2.substr(1)<<endl;
             //cout<<$4.substr(2)<<endl;
-          if($2.substr(1) == $4.substr(2)){
-                cout<<"\n[i] Tag Matches: "<<$2;
-                cout <<"\n[!] The text: "<<$3;
+          if($1.substr(1) == $3.substr(2)){
+                cout<<"\n[i] Tag Matches: "<<$1;
+                cout <<"\n[!] The text: "<<$2;
                 cout <<"\n[!] The $1 here: "<<$1;
                 cout<<"\n";
                 h.storeHtml($2, $3);
