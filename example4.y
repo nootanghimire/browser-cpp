@@ -58,10 +58,12 @@ int yywrap()
     return 0;
 }
 
-main()
+int main()
 {
     yyparse();
     yywrap();
+
+    return 0;
 }
 
 %}
@@ -88,13 +90,13 @@ tag:    |
                 cout <<"\n[!] The text: "<<$2;
                 cout <<"\n[!] The $1 here: "<<$1;
                 cout<<"\n";
-                h.storeHtml($2, $3);
+                h.storeHtml($1, $2);
                 //Maybe concatenate
                 //h.displayAll();
             } else {
-                cout<<"\n[!] Tag Mismatch: "<<$2<<" and "<<$4<<endl;
+                cout<<"\n[!] Tag Mismatch: "<<$1<<" and "<<$3<<endl;
             }
-            $$ = $1 + $2 + $3 + $4;
+            $$ = $1 + $2 + $3;
             //strcat($$, $3);
             //strcat($$, $4);
 
