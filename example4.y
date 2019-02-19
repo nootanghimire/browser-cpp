@@ -58,10 +58,12 @@ int yywrap()
     return 0;
 }
 
-main()
+int main()
 {
     yyparse();
     yywrap();
+
+    return 0;
 }
 
 %}
@@ -79,22 +81,22 @@ main()
 %%
 
 tag:    |   
-        contents opening_tag contents closing_tag 
+        opening_tag contents closing_tag 
         {
             //cout<<$2.substr(1)<<endl;
             //cout<<$4.substr(2)<<endl;
-          if($2.substr(1) == $4.substr(2)){
-                cout<<"\n[i] Tag Matches: "<<$2;
-                cout <<"\n[!] The text: "<<$3;
+          if($1.substr(1) == $3.substr(2)){
+                cout<<"\n[i] Tag Matches: "<<$1;
+                cout <<"\n[!] The text: "<<$2;
                 cout <<"\n[!] The $1 here: "<<$1;
                 cout<<"\n";
-                h.storeHtml($2, $3);
+                h.storeHtml($1, $2);
                 //Maybe concatenate
                 //h.displayAll();
             } else {
-                cout<<"\n[!] Tag Mismatch: "<<$2<<" and "<<$4<<endl;
+                cout<<"\n[!] Tag Mismatch: "<<$1<<" and "<<$3<<endl;
             }
-            $$ = $1 + $2 + $3 + $4;
+            $$ = $1 + $2 + $3;
             //strcat($$, $3);
             //strcat($$, $4);
 
